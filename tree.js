@@ -257,8 +257,8 @@ function loadNewNode(rootId) {
           .attr("stroke-width", 3);
 
         let html = `<strong>${d.data.child}</strong><br/>`;
-        if (d.data.parent) html += `Parent: ${d.data.parent}<br/>`;
         if (d.data.spouse) html += `Spouse: ${d.data.spouse}<br/>`;
+        if (d.data.parent) html += `Parent: ${d.data.parent}<br/>`;
         if (d.data.place) html += `Location: ${d.data.place}<br/>`;
         if (d.data.born) html += `Born: ${d.data.born}<br/>`;
         if (d.data.died) html += `Died: ${d.data.died}<br/>`;
@@ -356,3 +356,4 @@ function displayMemberCount() {
   if (!data || !data.length) return;
   document.getElementById("numberOfMember").textContent = data.length;
 }
+
