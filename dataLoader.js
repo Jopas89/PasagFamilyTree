@@ -20,7 +20,7 @@ window.GlobalData = {
  *******************************************************/
 window.GlobalSettings = {
   jsonFile: "pasagFamily.json", // Path to family JSON
-  bgImage: "IMG_0740.jpg",      // Background image for tree container
+  bgImage: "IMG_0740.JPG",      // Background image for tree container
 };
 
 /*******************************************************
@@ -305,3 +305,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
