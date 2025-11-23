@@ -1,0 +1,572 @@
+/* ======================================================
+   GLOBAL RESET
+====================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ======================================================
+   BODY & PAGE LAYOUT
+   - Centers main layout
+   - Ensures proper mobile/iOS viewport behavior
+====================================================== */
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;       /* Centers content horizontally */
+  align-items: flex-start;
+  min-height: 100dvh;            /* iOS-friendly full height */
+  width: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;            /* Prevent sideways scroll */
+}
+
+/* Maximum width for core layout regions */
+#controls,
+#main {
+  max-width: 1600px;
+  width: 100%;
+}
+
+
+/* ======================================================
+   LEFT CONTROL PANEL
+====================================================== */
+#controls {
+  flex: 0 0 200px;        /* Fixed width on desktop */
+  background: #2c3e50;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+}
+
+/* Section Title */
+#controls h2.title-border {
+  font-size: 18px;
+  text-align: center;
+  border-bottom: 2px solid #6c63ff;
+  padding-bottom: 6px;
+}
+
+/* Buttons container */
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Gradient action buttons */
+.control-buttons .button-gradient {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Label styling */
+#controls label {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px 0 4px;
+}
+
+/* Inputs (text, dropdowns, sliders) */
+#controls input[type="text"],
+#controls select,
+#controls input[type="range"] {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 16px; /* Prevent iOS zoom */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  background-color: #3b4a5a;
+  color: white;
+}
+
+#controls input[type="text"]::placeholder {
+  color: #eee;
+}
+
+#depthValue {
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+#depthRange {
+  width: 100%;
+  accent-color: #007bff;
+  cursor: pointer;
+}
+
+
+/* ======================================================
+   RIGHT MAIN PANEL
+====================================================== */
+#main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ecf0f1;
+}
+
+
+/* ======================================================
+   NAVBAR
+====================================================== */
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #333;
+  padding: 10px 30px;
+  color: white;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+#icon .logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Menu items */
+.menu ul {
+  display: flex;
+  list-style: none;
+}
+
+.menu ul li {
+  margin: 0 20px;
+  position: relative;
+}
+
+/* Menu links */
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+  color: orange;
+}
+
+
+/* ======================================================
+   HOME MODAL (Content-Centered Popup)
+   UPDATED TO WHITE BACKGROUND + BLACK TEXT
+====================================================== */
+#home {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  color: #000000;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  display: none;           
+  z-index: 1000;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Home close button */
+#home .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  background: #eee;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#home .close-btn:hover {
+  background: #00cc44;
+  color: #fff;
+}
+
+#home h3.attention-heading {
+  color: #d9534f;
+  font-size: 18px;
+  margin: 20px 0 8px;
+}
+
+#home p.attention {
+  color: #d9534f;
+  font-style: italic;
+  font-size: 16px;
+  margin: 0.5em 0;
+}
+
+/* Home stats section */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.stat h3 {
+  font-size: 32px;
+}
+
+.stat p {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* Recent updates list */
+.recent-updates {
+  margin: 40px auto 0;
+  max-width: 600px;
+}
+
+.recent-updates h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.recent-updates ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+
+/* ======================================================
+   OVERLAY MODALS (About, Contact, How-To)
+====================================================== */
+#aboutModal,
+#contactModal,
+#howToUseModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hidden state override */
+#aboutModal[hidden],
+#contactModal[hidden],
+#howToUseModal[hidden] {
+  display: none !important;
+}
+
+/* Visible state fade-in */
+#aboutModal:not([hidden]),
+#contactModal:not([hidden]),
+#howToUseModal:not([hidden]) {
+  opacity: 1;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+/* Close buttons for modals */
+#closeAbout,
+#closeContact,
+#closeHowToUse {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #eee;
+  color: #333;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+#closeAbout:hover,
+#closeContact:hover,
+#closeHowToUse:hover {
+  background: #00cc44;
+  color: #fff;
+}
+
+/* ======================= MODAL TITLES ======================= */
+.modal-content h2.title-border,
+#home h2.title-border {
+  font-size: 18px;
+  text-align: center;
+  border-bottom: 2px solid #6c63ff; /* Same as other modal titles */
+  padding-bottom: 6px;
+  margin-bottom: 1rem;
+  color: #000; /* Black text for all modals */
+}
+
+
+
+/* ======================================================
+   DROPDOWNS
+====================================================== */
+.dropdown-content {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #333;
+  width: 250px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown.active .dropdown-content {
+  display: block !important;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  color: white;
+}
+
+
+/* PDF dropdown area */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px;
+}
+
+#searchDropdown {
+  color: black;
+  background: white;
+  padding: 5px 30px 5px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='5'><polygon points='0,0 10,0 5,5' fill='black'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.search .btn {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  background: orange;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search .btn:hover {
+  background: darkorange;
+}
+
+
+/* ======================================================
+   FAMILY TREE VIEW AREA
+====================================================== */
+#treeContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  position: relative;
+  background: white;
+  padding-bottom: 20px;
+}
+
+#treeCopyright {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #666;
+  opacity: 0.9;
+}
+
+/* SVG Rendering */
+svg {
+  max-width: 100%;
+  margin: 20px auto;
+  display: block;
+}
+
+.node rect {
+  fill: lightblue;
+  stroke: steelblue;
+  stroke-width: 1px;
+  rx: 4;
+  ry: 4;
+}
+
+.node text {
+  font: 11px sans-serif;
+  text-anchor: middle;
+  alignment-baseline: middle;
+  pointer-events: none;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+.node .divider {
+  stroke: steelblue;
+  stroke-width: 1px;
+}
+
+.hide {
+  display: none !important;
+}
+
+
+/* ======================================================
+   TOOLTIP
+====================================================== */
+#tooltip {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 250px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #000;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 9999;
+}
+
+
+/* ======================================================
+   PDF OVERLAY PANEL
+====================================================== */
+#pdfContainer {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 400px;
+  height: 500px;
+  border: 2px solid #ccc;
+  background: white;
+  display: none;
+  z-index: 50;
+}
+
+#pdfViewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#closePDF {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#closePDF:hover {
+  background: crimson;
+}
+
+
+/* ======================================================
+   MOBILE LAYOUT (iPhone / iPad)
+====================================================== */
+@media (max-width: 900px) {
+
+  body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #controls {
+    width: 100% !important;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #navbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #tooltip {
+    width: 200px;
+    right: 10px;
+  }
+
+  #pdfContainer {
+    width: 90%;
+    height: 60vh;
+    right: 5%;
+  }
+}
