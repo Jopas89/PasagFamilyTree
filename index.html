@@ -1,0 +1,175 @@
+<!-- =======================================================
+       INDEX.HTML — REVISED CLEAN VERSION
+======================================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Pasag Family Tree</title>
+
+  <!-- D3.js library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Smooth scrolling -->
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       LEFT CONTROL PANEL
+  ======================================================= -->
+  <div id="controls">
+    <h2 class="title-border">🌳 Family Tree 🌿</h2>
+
+    <!-- Dynamic buttons -->
+    <div class="control-buttons"></div>
+
+    <!-- Node selector -->
+    <label for="nodeSelect">Select Person:</label>
+    <select id="nodeSelect"></select>
+  </div>
+
+  <!-- =======================================================
+       MAIN CONTENT AREA
+  ======================================================= -->
+  <div id="main">
+
+    <!-- ======================= NAVBAR ======================= -->
+    <div id="navbar">
+      <div id="icon">
+        <h2 class="logo">Jopas89</h2>
+      </div>
+
+      <div class="menu">
+        <ul>
+          <li><a href="#" id="homeLink">HOME</a></li>
+          <li><a href="#" id="aboutLink">ABOUT</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropbtn">CONTACT US ▾</a>
+            <ul class="dropdown-content">
+              <li><a href="#" data-action="suggest">Suggest</a></li>
+              <li><a href="#" data-action="add">Add Member</a></li>
+              <li><a href="#" data-action="remove">Remove Member</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#" id="howToUse">HOW TO USE</a></li>
+        </ul>
+      </div>
+
+      <!-- PDF search -->
+      <div class="search">
+        <select id="searchDropdown">
+          <option value="">Select member PDF…</option>
+        </select>
+        <button class="btn" onclick="window.openSelectedPDF()">Open</button>
+      </div>
+    </div>
+
+    <!-- ======================= HOME MODAL ======================= -->
+    <div id="homeModal" role="dialog" aria-modal="true" hidden>
+      <div class="modal-content">
+        <h2 class="title-border">Home</h2>
+
+        <div class="modal-message"></div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="number" id="totalMembers">loading...</div>
+            <div class="label">Family Members</div>
+          </div>
+          <div class="stat">
+            <div class="number" id="generationsCount">0</div>
+            <div class="label">Generations</div>
+          </div>
+          <div class="stat">
+            <div class="number" id="newMembersCount">0</div>
+            <div class="label">New Members This Year</div>
+          </div>
+        </div>
+
+        <div class="recent-updates">
+          <h2>Recent Updates / Family Events</h2>
+          <ul id="recentUpdates"></ul>
+        </div>
+
+        <div class="attention">
+          <h2>Attention</h2>
+          <ul id="attentionMessage"></ul>
+        </div>
+
+        <button id="closeHome" class="close-btn">×</button>
+      </div>
+    </div>
+
+    <!-- ======================= ABOUT MODAL ======================= -->
+    <div id="aboutModal" role="dialog" aria-modal="true" hidden>
+      <div class="modal-content">
+        <h2 class="title-border">About</h2>
+        <div class="modal-message"></div>
+        <button id="closeAbout" class="close-btn">×</button>
+      </div>
+    </div>
+
+    <!-- ======================= CONTACT MODAL ======================= -->
+    <div id="contactModal" role="dialog" aria-modal="true" hidden>
+      <div class="modal-content">
+        <h2 class="title-border">Contact Us</h2>
+        <div class="modal-message"></div>
+        <button id="closeContact" class="close-btn">×</button>
+      </div>
+    </div>
+
+    <!-- ======================= HOW TO USE MODAL ======================= -->
+    <div id="howToUseModal" role="dialog" aria-modal="true" hidden>
+      <div class="modal-content">
+        <h2 class="title-border">How to Use</h2>
+
+        <!-- Computer instructions -->
+        <div class="description_01">
+          <h2>Using Computer Browser</h2>
+          <ul id="description01"></ul>
+        </div>
+
+        <!-- iPad instructions -->
+        <div class="description_02">
+          <h2>Using iPad</h2>
+          <ul id="description02"></ul>
+        </div>
+
+        <button id="closeHowToUse" class="close-btn">×</button>
+      </div>
+    </div>
+
+    <!-- ======================= FAMILY TREE CANVAS ======================= -->
+    <div id="treeContainer">
+      <svg width="1200" height="700"></svg>
+
+      <div id="treeCopyright">
+        © 2026 Jopas89. All rights reserved.
+      </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+  </div> <!-- End #main -->
+
+  <!-- =======================================================
+       SCRIPTS
+  ======================================================= -->
+  <script src="dataLoader.js"></script>
+  <script src="navbar.js"></script>
+  <script src="tree.js"></script>
+
+</body>
+</html>
